@@ -2,13 +2,13 @@
 
 namespace Cesargb\KeyValueStore;
 
-use Cesargb\KeyValueStore\Contracts\Store as StoreContract;
+use Cesargb\KeyValueStore\Contracts\Store as StoreRepository;
 use Cesargb\KeyValueStore\Exceptions\InvalidKeyException;
 
 class Store implements StoreContract
 {
     public function __construct(
-        private readonly StoreContract $repository,
+        private readonly StoreRepository $repository,
     ) {}
 
     public function get(string $key, mixed $default = null): mixed
