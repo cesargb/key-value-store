@@ -1,0 +1,26 @@
+{
+    "name": "cesargb/key-value-store",
+    "description": "A simple key-value store implementation in PHP.",
+    "type": "library",
+    "keywords": [ "key-value store"],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Cesargb\\KeyValueStore\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cesargb\\KeyValueStore\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.5",
+        "phpstan/phpstan": "^2.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
