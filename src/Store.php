@@ -5,7 +5,7 @@ namespace Cesargb\KeyValueStore;
 use Cesargb\KeyValueStore\Contracts\Store as StoreRepository;
 use Cesargb\KeyValueStore\Exceptions\InvalidKeyException;
 
-class Store implements StoreContract
+class Store implements StoreRepository
 {
     public function __construct(
         private readonly StoreRepository $repository,
