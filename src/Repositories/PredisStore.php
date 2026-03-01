@@ -24,7 +24,11 @@ class PredisStore implements Store
 
     public function set(string $key, mixed $value): bool
     {
-        return $this->execute(fn (): bool => $this->client->set($this->prefix.$key, serialize($value)) === 'OK');
+        return $this->execute(function () use ($key, $value): bool {
+            $result = $this->client->set($this->prefix.$key, serialize($value));
+
+            return $this->isOkResponse($result);
+        });
     }
 
     public function delete(string $key): bool
@@ -90,7 +94,9 @@ class PredisStore implements Store
                 $pairs[$this->prefix.$key] = serialize($value);
             }
 
-            return $this->client->mset($pairs) === 'OK';
+            $result = $this->client->mset($pairs);
+
+            return $this->isOkResponse($result);
         });
     }
 
@@ -131,5 +137,22 @@ class PredisStore implements Store
         } catch (\Throwable) {
             return $callback();
         }
+    }
+
+    private function isOkResponse(mixed $response): bool
+    {
+        if ($response === true) {
+            return true;
+        }
+
+        if (is_string($response)) {
+            return strtoupper($response) === 'OK';
+        }
+
+        if (is_object($response) && method_exists($response, '__toString')) {
+            return strtoupper((string) $response) === 'OK';
+        }
+
+        return false;
     }
 }
