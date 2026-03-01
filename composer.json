@@ -23,7 +23,8 @@
         "illuminate/database": "^12.0|^13.0"
     },
     "suggest": {
-        "illuminate/database": "Required to use EloquentStore repository."
+        "illuminate/database": "Required to use EloquentStore repository.",
+        "ext-redis": "Required to use RedisStore repository."
     },
     "minimum-stability": "dev",
     "prefer-stable": true
