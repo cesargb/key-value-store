@@ -52,4 +52,4 @@ jobs:
               run: composer require predis/predis --no-interaction --no-progress
 
             - name: Execute tests
-              run: composer test
+              run: ./vendor/bin/phpunit
