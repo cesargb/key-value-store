@@ -1,5 +1,7 @@
 parameters:
     paths:
         - src/
+    scanFiles:
+        - stubs/predis.stub.php
 
     level: 5

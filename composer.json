@@ -24,7 +24,8 @@
     },
     "suggest": {
         "illuminate/database": "Required to use EloquentStore repository.",
-        "ext-redis": "Required to use RedisStore repository."
+        "ext-redis": "Required to use RedisStore repository.",
+        "predis/predis": "Required to use PredisStore repository."
     },
     "minimum-stability": "dev",
     "prefer-stable": true
