@@ -22,10 +22,20 @@
         "phpstan/phpstan": "^2.1",
         "illuminate/database": "^12.0|^13.0"
     },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    },
     "suggest": {
         "illuminate/database": "Required to use EloquentStore repository.",
         "ext-redis": "Required to use RedisStore repository.",
         "predis/predis": "Required to use PredisStore repository."
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cesargb\\KeyValueStore\\Laravel\\KeyValueStoreServiceProvider"
+            ]
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

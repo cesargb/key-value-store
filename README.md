@@ -15,6 +15,7 @@ Optional dependencies:
 - `ext-redis` for `RedisStore`
 - `predis/predis` for `PredisStore`
 - `illuminate/database` for `EloquentStore`
+- `illuminate/support` for Laravel service provider integration
 
 ## Usage
 
@@ -89,10 +90,39 @@ $predis = new Predis\Client(['host' => '127.0.0.1', 'port' => 6379]);
 $store = new Store(new PredisStore($predis, prefix: 'kv_'));
 
 // Eloquent repository
-// $model must be an Eloquent model with key and value columns.
+// Uses package default model/table (key_value_store).
+$store = new Store(new EloquentStore());
+
+// Optional custom model (must have key + value columns).
 $store = new Store(new EloquentStore($model));
 ```
 
 Key rules:
 - Keys cannot be empty.
 - Keys cannot contain: `{ } ( ) / \ @ :`
+
+## Laravel integration
+
+The package includes `Cesargb\KeyValueStore\Laravel\KeyValueStoreServiceProvider`
+with auto-discovery support.
+
+Publish assets:
+
+```bash
+php artisan vendor:publish --tag=key-value-store-config
+php artisan vendor:publish --tag=key-value-store-migrations
+php artisan migrate
+```
+
+Publishing is only registered when the application is running in console, and
+the migration is published with a current timestamped filename.
+
+Resolve from container:
+
+```php
+<?php
+
+use Cesargb\KeyValueStore\Contracts\Store as StoreContract;
+
+$store = app(StoreContract::class);
+```
