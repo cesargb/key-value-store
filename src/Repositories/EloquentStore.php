@@ -3,13 +3,18 @@
 namespace Cesargb\KeyValueStore\Repositories;
 
 use Cesargb\KeyValueStore\Contracts\Store;
+use Cesargb\KeyValueStore\Models\KeyValue;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentStore implements Store
 {
     public function __construct(
-        private readonly Model $model,
-    ) {}
+        ?Model $model = null,
+    ) {
+        $this->model = $model ?? new KeyValue;
+    }
+
+    private readonly Model $model;
 
     public function get(string $key, mixed $default = null): mixed
     {

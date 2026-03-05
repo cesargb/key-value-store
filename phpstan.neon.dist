@@ -3,5 +3,6 @@ parameters:
         - src/
     scanFiles:
         - stubs/predis.stub.php
+        - stubs/laravel_helpers.stub.php
 
     level: 5

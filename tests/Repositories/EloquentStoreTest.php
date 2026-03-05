@@ -29,7 +29,7 @@ class EloquentStoreTest extends TestCase
             $table->longText('value')->nullable();
         });
 
-        $this->store = new EloquentStore(new KeyValue);
+        $this->store = new EloquentStore;
     }
 
     protected function tearDown(): void
@@ -161,5 +161,13 @@ class EloquentStoreTest extends TestCase
         $this->assertNotNull($row);
         $this->assertSame('persistent', $row->key);
         $this->assertSame(serialize('data'), $row->value);
+    }
+
+    public function test_accepts_custom_model(): void
+    {
+        $store = new EloquentStore(new KeyValue);
+
+        $this->assertTrue($store->set('custom', 'model'));
+        $this->assertSame('model', $store->get('custom'));
     }
 }
