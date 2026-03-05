@@ -44,8 +44,7 @@ class KeyValueStoreServiceProvider extends ServiceProvider
         ], 'key-value-store-config');
 
         $this->publishes([
-            __DIR__.'/../../database/migrations/create_key_value_store_table.php.stub'
-                => database_path('migrations/'.date('Y_m_d_His').'_create_key_value_store_table.php'),
+            __DIR__.'/../../database/migrations/create_key_value_store_table.php.stub' => database_path('migrations/'.date('Y_m_d_His').'_create_key_value_store_table.php'),
         ], 'key-value-store-migrations');
     }
 }
